@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,9 @@ namespace QuestRooms.DAL.Entities
 {
     public class City
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
     }
 }
