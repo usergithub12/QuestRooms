@@ -16,12 +16,12 @@ namespace QuestRooms.DAL.Configuration
 
         List<string> SQLs = new List<string>
         {
-            "SQL/Cities.sql",
-            "SQL/Countries.sql",
-            "SQL/Streets.sql",
-            "SQL/Addresses.sql",
-            "SQL/Companies.sql",
-            "SQL/Rooms.sql"
+            "/bin/SQL/Cities.sql",
+            "/bin/SQL/Countries.sql",
+            "/bin/SQL/Streets.sql",
+            "/bin/SQL/Addresses.sql",
+            "/bin/SQL/Companies.sql",
+            "/bin/SQL/Rooms.sql"
         };
 
         protected override void Seed(RoomsContext context)
@@ -29,12 +29,13 @@ namespace QuestRooms.DAL.Configuration
             //context.Database.ExecuteSqlCommand("Insert into databse ");
             //context.Addresses.Add()
 
+            var path = System.AppDomain.CurrentDomain.BaseDirectory;
 
             string query = "";
 
             foreach (var f in SQLs)
             {
-                query = ReadSQLFromFile(f);
+                query = ReadSQLFromFile(path+f);
                 context.Database.ExecuteSqlCommand(query);
             }
         }

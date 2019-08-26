@@ -1,5 +1,6 @@
 ﻿using QuestRoom.BLL.Services.Abstraction;
 using QuestRoom.BLL.Services.Implementation;
+using QuestRooms.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace QuestRooms.UI.Controllers
         }
         public ActionResult Index()
         {
-
-            return View();
+          var cities=  citiesService.GetCities().Select(cty => new CityViewModel { Id = cty.Id, Name = cty.Name }).ToList<CityViewModel>();
+            return View(cities);
         }
     }
 }
