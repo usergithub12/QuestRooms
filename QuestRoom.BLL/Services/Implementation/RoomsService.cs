@@ -2,7 +2,6 @@
 using DataAccessLayer.Repositories;
 using QuestRoom.BLL.DTOModels;
 using QuestRoom.BLL.Services.Abstraction;
-using QuestRooms.DAL;
 using QuestRooms.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,23 +11,24 @@ using System.Threading.Tasks;
 
 namespace QuestRoom.BLL.Services.Implementation
 {
-    public class CitiesService : ICitiesService
+   public class RoomsService:IRoomsService
     {
-        private readonly IGenericRepository<City> cityRepos;
+
+        private readonly IGenericRepository<Room> roomRepos;
 
         private readonly IMapper mapper;
 
-        public CitiesService(IGenericRepository<City> _cityRepos,IMapper _mapper)
+        public RoomsService(IGenericRepository<Room> _roomRepos, IMapper _mapper)
         {
-            cityRepos = _cityRepos;
+            roomRepos = _roomRepos;
             mapper = _mapper;
         }
 
-        public ICollection<CityDTO> GetCities()
+        public ICollection<RoomDTO> GetRooms()
         {
-            var cities = cityRepos.GetAll().ToList();
-                        
-            return mapper.Map<List<City>,ICollection<CityDTO>>(cities);
+            var rooms = roomRepos.GetAll().ToList();
+
+            return mapper.Map<List<Room>, ICollection<RoomDTO>>(rooms);
 
 
         }
