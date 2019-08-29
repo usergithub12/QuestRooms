@@ -11,5 +11,7 @@ namespace QuestRoom.BLL.Services.Abstraction
   public  interface IRoomsService
     {
         ICollection<RoomDTO> GetRooms();
+
+
     }
 }

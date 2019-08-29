@@ -22,8 +22,15 @@ namespace QuestRooms.UI.Controllers
         {
             var rooms = roomsService.GetRooms();
             return View(rooms);
-            
         }
+
+        public ActionResult Buy(int id)
+        {
+            var rooms = roomsService.GetRooms();
+            
+            return View(rooms.FirstOrDefault(r => r.Id == id));
+        }        
+
     }
 
 }
