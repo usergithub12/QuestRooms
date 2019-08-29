@@ -1,41 +1,43 @@
 ﻿@model IEnumerable<QuestRoom.BLL.DTOModels.RoomDTO>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<div class="container">
-    
-    <div class="row">
 
-        @foreach (var item in Model)
+
+<h2>Index</h2>
+
+    <ul id="cities" class="list-group">
+        @foreach (var c in ViewBag.Cities)
         {
-            <div class="card  col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
-                <div class="card-img-top">
-                    <img class="img-fluid" src="https://picsum.photos/300/300" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">
-                        @item.Description
-                        @item.Company.Name
-                        @item.Address.Street.Name
-                        @item.Address.City.Name
-                        @item.Address.Country.Name
-                        @item.Address.HouseNumber
-                        @item.Email
-                        @item.LvlDifficulty
-                        @item.LvlFear
-                        @item.Rating
-                        @item.AllTime
-                        @item.Phone
-                    </p>
-                    <a href="@Url.Action("Buy","Rooms", new { id= item.Id})" class="btn btn-primary">Buy Now</a>
-                </div>
-            </div>
+             <li> <input id="@c.Id" onchange="Click_cities(event)" type="checkbox" /> @c.Name</li>
+           
         }
-    </div>
+    </ul>
+
+
+@*@Ajax.ActionLink(City, "RoomsByCity", new { id = @item.id }, new AjaxOptions { UpdateTargetId = "cities" })*@
+
+<div class="container">
+
+   
+        <div id="roomsResult">
+            @{
+                Html.RenderPartial("RoomsByCity", Model);
+            }
+        </div>
+      
 </div>
+
+<script >
+
+    function Click_cities(event) {
+        var city_id = event.target.id;
+        console.log(city_id);
+        $('#roomsResult').load('@Url.Action("RoomsByCity", "Rooms")?id='+city_id);
+    }
+
+</script>

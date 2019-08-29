@@ -32,5 +32,12 @@ namespace QuestRoom.BLL.Services.Implementation
 
 
         }
+
+        public ICollection<RoomDTO> GetRoomsByCity(int id)
+        {
+            var rooms = roomRepos.GetAll().ToList();
+            var room_list = rooms.Where(r => r.Address.City.Id == id).ToList();
+            return mapper.Map<List<Room>, ICollection<RoomDTO>>(room_list);
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<QuestRoom.BLL.DTOModels.RoomDTO>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card  col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+            <div class="card-img-top">
+                <img class="img-fluid" src="https://picsum.photos/300/300" alt="Card image cap">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">
+                    @item.Description
+                    @item.Company.Name
+                    @item.Address.Street.Name
+                    @item.Address.City.Name
+                    @item.Address.Country.Name
+                    @item.Address.HouseNumber
+                    @item.Email
+                    @item.LvlDifficulty
+                    @item.LvlFear
+                    @item.Rating
+                    @item.AllTime
+                    @item.Phone
+                </p>
+                <a href="@Url.Action("Buy","Rooms", new { id= item.Id})" class="btn btn-primary">Buy Now</a>
+            </div>
+        </div>
+    }
+</div>
+

@@ -12,15 +12,20 @@ namespace QuestRooms.UI.Controllers
     {
         private readonly IRoomsService roomsService;
 
+        private readonly ICitiesService citiesService;
         // GET: Rooms
 
-        public RoomsController(IRoomsService _roomsService)
+        public RoomsController(IRoomsService _roomsService,ICitiesService _citiesService)
         {
             roomsService = _roomsService;
+            citiesService = _citiesService;
         }
         public ActionResult Index()
         {
             var rooms = roomsService.GetRooms();
+
+            var cities = citiesService.GetCities();
+            ViewBag.Cities = cities;
             return View(rooms);
         }
 
@@ -30,6 +35,13 @@ namespace QuestRooms.UI.Controllers
             
             return View(rooms.FirstOrDefault(r => r.Id == id));
         }        
+
+       public ActionResult RoomsByCity(int id)
+        {
+            var rooms = roomsService.GetRoomsByCity(id);
+            return PartialView("RoomsByCity",rooms);
+        }
+
 
     }
 
