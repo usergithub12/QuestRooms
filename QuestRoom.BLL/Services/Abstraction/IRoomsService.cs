@@ -14,5 +14,12 @@ namespace QuestRoom.BLL.Services.Abstraction
 
 
         ICollection<RoomDTO> GetRoomsByCity(int id);
+
+
+        ICollection<RoomDTO> GetRoomsByDifficulty(int lvl);
+
+        ICollection<RoomDTO> GetRoomsByFear(int lvl);
+
+       List<int> GetCountRoomsByCity();
     }
 }

@@ -39,5 +39,33 @@ namespace QuestRoom.BLL.Services.Implementation
             var room_list = rooms.Where(r => r.Address.City.Id == id).ToList();
             return mapper.Map<List<Room>, ICollection<RoomDTO>>(room_list);
         }
+
+        public ICollection<RoomDTO> GetRoomsByDifficulty(int lvl)
+        {
+            var rooms = roomRepos.GetAll().ToList();
+            var room_list = rooms.Where(r => r.LvlDifficulty == lvl).ToList();
+            return mapper.Map<List<Room>, ICollection<RoomDTO>>(room_list);
+        }
+
+        public ICollection<RoomDTO> GetRoomsByFear(int lvl)
+        {
+            var rooms = roomRepos.GetAll().ToList();
+            var room_list = rooms.Where(r => r.LvlFear == lvl).ToList();
+            return mapper.Map<List<Room>, ICollection<RoomDTO>>(room_list);
+        }
+
+      public  List<int> GetCountRoomsByCity()
+        {
+            List<int> counts = new List<int>();
+            var rooms = roomRepos.GetAll().ToList();
+
+            foreach (var item in rooms)
+            {
+                var room = rooms.GroupBy(r => r.Address.City.Id).Count();
+                counts.Add(room);
+            }
+          
+            return counts;
+        }
     }
 }

@@ -16,8 +16,27 @@ textarea {
     max-width: 280px;
 }
 
-#cities {
-    height:300px;
-    float:left;
-    overflow-y:auto;
+
+h2{
+    text-align:center;
 }
+.filters {
+    height: 600px;
+    float: left; 
+}
+    .filters ul {
+        padding:15px;
+        list-style:none;
+        height:200px;
+        overflow-y: auto;
+    }
+        .filters ul li:hover {
+            color: deepskyblue;
+            background-color: lightgray;
+        }
+
+    label{
+        font-weight:bold;
+        font-size:20px;
+     margin-left:30px;
+    }

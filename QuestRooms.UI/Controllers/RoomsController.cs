@@ -26,6 +26,10 @@ namespace QuestRooms.UI.Controllers
 
             var cities = citiesService.GetCities();
             ViewBag.Cities = cities;
+
+            ViewBag.Counts = roomsService.GetCountRoomsByCity();
+
+
             return View(rooms);
         }
 
@@ -42,6 +46,16 @@ namespace QuestRooms.UI.Controllers
             return PartialView("RoomsByCity",rooms);
         }
 
+        public ActionResult RoomsByDifficulty(int lvl)
+        {
+            var rooms = roomsService.GetRoomsByDifficulty(lvl);
+            return PartialView("RoomsByCity", rooms);
+        }
+        public ActionResult RoomsByFear(int lvl)
+        {
+            var rooms = roomsService.GetRoomsByFear(lvl);
+            return PartialView("RoomsByCity", rooms);
+        }
 
     }
 

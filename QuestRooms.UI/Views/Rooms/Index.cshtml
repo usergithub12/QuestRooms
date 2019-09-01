@@ -3,21 +3,38 @@
 @{
     /**/
 
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quest Rooms";
 }
 
 
 
-<h2>Index</h2>
-
-    <ul id="cities" class="list-group">
+<h2>Quest Rooms</h2>
+    <div class="filters">
+      <label>City</label>
+    <ul id="cities">
         @foreach (var c in ViewBag.Cities)
         {
              <li> <input id="@c.Id" onchange="Click_cities(event)" type="checkbox" /> @c.Name</li>
            
         }
     </ul>
-
+    <label>Difficulty</label>
+	<ul id="lvl_diff">
+	@foreach (var item in Model.GroupBy(x => x.LvlDifficulty).Select(x => x.FirstOrDefault()).OrderBy(r => r.LvlDifficulty))
+        {
+           <li> <input id="@item.LvlDifficulty" onchange="Click_lvlDiff(event)" type="checkbox" /> @item.LvlDifficulty </li>
+  
+        }
+    </ul>
+          <label>Fear</label>
+		<ul id="lvl_fear">
+	@foreach (var item in Model.GroupBy(x => x.LvlFear).Select(x => x.FirstOrDefault()).OrderBy(r => r.LvlFear))
+        {
+           <li> <input id="@item.LvlFear" onchange="Click_lvlFear(event)" type="checkbox" /> @item.LvlFear</li>
+  
+        }
+    </ul>
+    </div>
 
 @*@Ajax.ActionLink(City, "RoomsByCity", new { id = @item.id }, new AjaxOptions { UpdateTargetId = "cities" })*@
 
@@ -40,4 +57,15 @@
         $('#roomsResult').load('@Url.Action("RoomsByCity", "Rooms")?id='+city_id);
     }
 
+    function Click_lvlDiff(event) {
+        var lvl_id = event.target.id;
+        console.log(lvl_id);
+        $('#roomsResult').load('@Url.Action("RoomsByCity", "Rooms")?id='+lvl_id);
+    }
+
+    function Click_lvlFear(event) {
+        var lvl_id = event.target.id;
+        console.log(lvl_id);
+        $('#roomsResult').load('@Url.Action("RoomsByCity", "Rooms")?id='+lvl_id);
+    }
 </script>
