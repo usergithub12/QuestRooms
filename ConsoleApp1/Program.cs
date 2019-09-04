@@ -13,14 +13,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-           GenericRepository<City> repository = new GenericRepository<City>(new RoomsContext());
+           //GenericRepository<City> repository = new GenericRepository<City>(new RoomsContext());
 
-            var countr = repository.GetAll();
+           // var countr = repository.GetAll();
 
-            foreach(var c in countr)
-            {
-                Console.WriteLine(c.Name);
-            }
+           // foreach(var c in countr)
+           // {
+           //     Console.WriteLine(c.Name);
+           // }
 
         }
     }
