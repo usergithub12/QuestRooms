@@ -12,7 +12,7 @@ namespace QuestRooms.DAL
         public RoomsContext()
             : base("name=RoomsContext")
         {
-            Database.SetInitializer(new DbInitializer());
+           // Database.SetInitializer(new DbInitializer());
         }
       public  DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }

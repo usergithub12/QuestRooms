@@ -15,7 +15,7 @@ namespace QuestRooms.UI.Controllers
         private readonly ICitiesService citiesService;
         // GET: Rooms
 
-        public RoomsController(IRoomsService _roomsService,ICitiesService _citiesService)
+        public RoomsController(IRoomsService _roomsService, ICitiesService _citiesService)
         {
             roomsService = _roomsService;
             citiesService = _citiesService;
@@ -32,7 +32,7 @@ namespace QuestRooms.UI.Controllers
 
             return View(rooms);
         }
-
+        [Authorize]
         public ActionResult Buy(int id)
         {
             var rooms = roomsService.GetRooms();

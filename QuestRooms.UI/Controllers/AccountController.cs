@@ -79,17 +79,19 @@ namespace QuestRooms.UI.Controllers
         public ActionResult Login(LoginVM model)
         {
 
-            var user = new AppUser
+            var user = UserManager.Find(model.Login, model.Password);
+            if(user==null)
             {
-                Email = model.Login,
-                UserName = model.Login
-            };
+                ModelState.AddModelError("", "User dosnt exists");
+                return View();
+            }
+
             //////LOGIN
             ClaimsIdentity claim = UserManager.CreateIdentity(user,
 
 DefaultAuthenticationTypes.ApplicationCookie);
 
-            AuthenticationManager.SignOut();
+            
 
             AuthenticationManager.SignIn(new AuthenticationProperties
 
@@ -98,23 +100,13 @@ DefaultAuthenticationTypes.ApplicationCookie);
                 IsPersistent = true
 
             }, claim);
+            return RedirectToAction("Index", "Rooms");
+        }
 
-
-
-
-
-
-         ////   var res = AuthenticationManager.SignIn(user, model.Password);
-         //               if (res.Succeeded)
-         //   {
-         //       // AuthenticationManager.SignIn(DefaultAuthenticationTypes.ApplicationCookie);
-         //       return RedirectToAction("Index", "Rooms");
-         //   }
-         //   else
-         //   {
-         //       ViewBag.Errors = res.Errors;
-         //   }
-            return View();
+        public ActionResult SignOut()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
     }
